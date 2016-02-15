@@ -3,6 +3,11 @@ import java.util.regex.Pattern;
 
 /**
  * Created by lingduokong on 2/13/16.
+ *
+ * this class creates a game instance.
+ * It starts from a untouched panel.
+ * User inputs row and col values to touch a position.
+ *
  */
 public class Game {
 
@@ -34,7 +39,8 @@ public class Game {
         generateBombs(bombNum);
         panelValues = new String[size][size];
         setGamePanelValues();
-        tips();
+        while (tips() > 0) {
+        }
     }
 
     /*
@@ -99,7 +105,7 @@ public class Game {
         gamePanel.printPanel();
     }
 
-    private void tips() {
+    private int tips() {
         gamePanel.printPanel();
         int row = 0, col = 0;
         while (true) {
@@ -129,9 +135,10 @@ public class Game {
         System.out.println("touch " + row + ", " + col);
 
         if (go(row - 1, col - 1) != 0) {
-            return;
+            return 0;
+        } else {
+            return 1;
         }
-        tips();
     }
 
 

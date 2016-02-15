@@ -2,8 +2,9 @@
  * Created by lingduokong on 2/13/16.
  *
  * It is a panel to show the current panel of the game.
- *
+ * It prints out the current panel with row and col numbers
  */
+
 public class GamePanel {
 
     public final String UNTOUCH = "X";
@@ -13,6 +14,11 @@ public class GamePanel {
     int row, col;
     private Cell[][] panel;
 
+    /**
+     * It is the constructor of the panel which should be initialized by row and col number
+     * @param row number of rows
+     * @param col number of values
+     */
     public GamePanel(int row, int col) {
         this.row = row;
         this.col = col;
@@ -28,6 +34,12 @@ public class GamePanel {
         }
     }
 
+    /**
+     * get the code of a cell
+     * @param row
+     * @param col
+     * @return the string representing the state
+     */
     public String getACellCode(int row, int col) {
         if (getACellTouchState(row, col)) {
             return panel[row][col].getRepresentCode();
@@ -36,6 +48,12 @@ public class GamePanel {
         }
     }
 
+    /**
+     * set the cell at (row, col) position to code value
+     * @param row
+     * @param col
+     * @param code
+     */
     public void setACellCode(int row, int col, String code) {
         if (row < 0 || row >= this.row || col < 0 || col >= this.col) {
             System.out.println("Illegal arguments, please try again!");
@@ -44,6 +62,12 @@ public class GamePanel {
         panel[row][col].setRepresentCode(code);
     }
 
+    /**
+     * get whether the cell at (row, col) is touch or not
+     * @param row
+     * @param col
+     * @return true for touched and false for untouched
+     */
     public boolean getACellTouchState(int row, int col) {
         if (row < 0 || row >= this.row || col < 0 || col >= this.col) {
             System.out.println("Illegal arguments, please check!");
@@ -52,6 +76,12 @@ public class GamePanel {
         return panel[row][col].isTouch();
     }
 
+    /**
+     * set the touch state of a cell at (row, col) to (state)
+     * @param row
+     * @param col
+     * @param state
+     */
     public void setACellTouchState(int row, int col, boolean state) {
         if (row < 0 || row >= this.row || col < 0 || col >= this.col) {
             System.out.println("Illegal arguments, please check!");
@@ -60,6 +90,9 @@ public class GamePanel {
         panel[row][col].setTouch(state);
     }
 
+    /**
+     * print the panel to the terminal instead of using GUI
+     */
     public void printPanel() {
         System.out.format("%3d ", 0);
         for (int i = 1; i <= row; i++) {
@@ -96,6 +129,7 @@ public class GamePanel {
 
         /**
          * Constructor to create the cell
+         * The touch state of the panel is false as default
          * @param representCode parse in UFT-8 code or just simple chars
          */
         Cell(String representCode) {
@@ -119,6 +153,9 @@ public class GamePanel {
             this.representCode = representCode;
         }
 
+        /**
+         * It prints the cell code according to its touch state
+         */
         public void print() {
             if (!isTouch()) {
                 System.out.print(UNTOUCH);
