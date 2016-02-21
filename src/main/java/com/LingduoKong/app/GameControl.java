@@ -11,10 +11,10 @@ public class GameControl implements GameFrame {
     final String TOUCH = "TOUCH";
 
     GameData gameData;
-    boolean isWin = false;
-    boolean isLose = false;
-    int row;
-    int col;
+    private boolean isWin = false;
+    private boolean isLose = false;
+    private int row;
+    private int col;
 
     public GameControl() {}
 
@@ -34,7 +34,11 @@ public class GameControl implements GameFrame {
             for (int j = 0; j < col; j++) {
                 Cell cell = gameData.getCell(i, j);
                 if (cell.getCode().equals(MINE)) {
-                    continue;
+                    if (cell.isTouch()) {
+                        isWin = false;
+                    } else {
+                        continue;
+                    }
                 } else if (!cell.isTouch()) {
                     isWin = false;
                 }
@@ -57,6 +61,7 @@ public class GameControl implements GameFrame {
         if (cell.isTouch()) {
             throw new IllegalArgumentException("Can not be touched again");
         } else if (cell.getCode().equals(MINE)) {
+            cell.setTouch(true);
             isLose = true;
         } else {
             expand(x, y);

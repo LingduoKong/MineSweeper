@@ -9,5 +9,5 @@ public interface PanelFrame {
 
     boolean getAction();
 
-
+    void showAll();
 }

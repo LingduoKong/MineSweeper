@@ -60,4 +60,14 @@ public class TerminalGamePanel implements PanelFrame {
         }
     }
 
+    @Override
+    public void showAll() {
+        Cell[][] finalResult = gameControl.gameData.getData();
+        for (int i = 0; i < finalResult.length; i++) {
+            for (int j = 0; j < finalResult[0].length; j++) {
+                System.out.format("%3s", finalResult[i][j].getCode());
+            }
+            System.out.println();
+        }
+    }
 }
